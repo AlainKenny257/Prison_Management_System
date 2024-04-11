@@ -6,6 +6,7 @@ package rw.gov.PMS.Dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import rw.gov.PMS.Model.LoginModel;
 
@@ -24,6 +25,8 @@ public class LoginDAO {
             Statement st = con.createStatement();
             
             String sql = "INSERT INTO login";
+            
+            PreparedStatement ppst = con.prepareStatement(sql);
         } catch (Exception e) {
             e.printStackTrace();
         }
