@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package rw.gov.View;
+package rw.gov.PMS.View;
 
 import javax.swing.JOptionPane;
+import rw.gov.PMS.Dao.LoginDAO;
+import rw.gov.PMS.Model.LoginModel;
 
 /**
  *
@@ -63,6 +65,11 @@ public class Login extends javax.swing.JFrame {
         roleType.setFont(new java.awt.Font("Montserrat SemiBold", 1, 20)); // NOI18N
         roleType.setForeground(new java.awt.Color(25, 118, 210));
         roleType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Your Role", "ADMIN", "STAFF" }));
+        roleType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                roleTypeActionPerformed(evt);
+            }
+        });
 
         loginBtn.setBackground(new java.awt.Color(255, 255, 255));
         loginBtn.setFont(new java.awt.Font("Montserrat ExtraBold", 1, 24)); // NOI18N
@@ -184,14 +191,43 @@ public class Login extends javax.swing.JFrame {
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
+        
+        // Getting Data
+        LoginModel logMod = new LoginModel();
+        logMod.getUsername();
+        logMod.getPassword();
+        logMod.getRole();
+        
+        //Caling DAO
+//        LoginDAO dao = new LoginDAO();
+//        Integer rowAffected = dao.loginUser(logMod);
+//        if (rowAffected!=null) {
+//            JOptionPane.showMessageDialog(this, "Welcome");
+//        }else{
+//            JOptionPane.showMessageDialog(this, "User doesn't exist");
+//        }
+        
+        
+        
+        // Validations
         String Username = txtUser.getText();
         String Password = new String (txtPass.getPassword());
         String Role = (String) roleType.getSelectedItem();
         
         if (Username.isEmpty() || Password.isEmpty() || Role.isEmpty()) {
             JOptionPane.showMessageDialog(this, "You can't leave the fields blank!");
+        }else{
+        Administrator admin = new  Administrator();
+        admin.name.setText(Username);
+        admin.setVisible(true);
         }
+        
     }//GEN-LAST:event_loginBtnActionPerformed
+
+    private void roleTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleTypeActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_roleTypeActionPerformed
 
     /**
      * @param args the command line arguments
