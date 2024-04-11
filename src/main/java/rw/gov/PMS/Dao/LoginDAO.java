@@ -19,7 +19,7 @@ public class LoginDAO {
     private  String Username = "root";
     private  String Password = "";
     
-    public void loginUser(LoginModel loginObj){
+    public int loginUser(LoginModel loginObj){
         try {
             Connection con = DriverManager.getConnection(URL, Username, Password);
             Statement st = con.createStatement();
@@ -27,8 +27,18 @@ public class LoginDAO {
             String sql = "INSERT INTO login";
             
             PreparedStatement ppst = con.prepareStatement(sql);
+            ppst.setString(1, loginObj.getUsername());
+            ppst.setString(2, loginObj.getPassword());
+            ppst.setString(3, loginObj.getRole());
+            int rowAffected = ppst.executeUpdate();
+            
+            con.close();
+            return rowAffected;
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        return null;
     }
 }
