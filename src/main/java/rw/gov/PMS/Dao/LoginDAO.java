@@ -7,37 +7,30 @@ package rw.gov.PMS.Dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import rw.gov.PMS.Model.LoginModel;
 
 /**
  *
  * @author The_Great
  */
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import rw.gov.PMS.View.Login;
+import rw.gov.PMS.View.Login.login;
+
 public class LoginDAO {
-    private String URL = "jdbc:mysql://localhost:3306/";
-    private  String Username = "root";
-    private  String Password = "";
+    private String url = "jdbc:mysql://localhost:3306/prison_management_system_db";
+    private String username = "root";
+    private String password = "";
+
+
     
-    public int loginUser(LoginModel loginObj){
-        try {
-            Connection con = DriverManager.getConnection(URL, Username, Password);
-            Statement st = con.createStatement();
-            
-            String sql = "INSERT INTO login";
-            
-            PreparedStatement ppst = con.prepareStatement(sql);
-            ppst.setString(1, loginObj.getUsername());
-            ppst.setString(2, loginObj.getPassword());
-            ppst.setString(3, loginObj.getRole());
-            int rowAffected = ppst.executeUpdate();
-            
-            con.close();
-            return rowAffected;
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
 }
